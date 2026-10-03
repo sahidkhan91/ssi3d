@@ -1,0 +1,11 @@
+{
+	// style.css intentionally uses vendor prefixes for browser support:
+	//   -webkit-backdrop-filter / -webkit-mask  (Safari)
+	//   -webkit-font-smoothing, -moz-osx-font-smoothing (macOS rendering)
+	//   -webkit-overflow-scrolling, -webkit-text-size-adjust (iOS)
+	// VS Code's built-in CSS linter warns on EVERY vendor-prefixed property
+	// (css.lint.vendorPrefix, default "warning") — that's the 23 problems.
+	// They are not real errors; ignoring the rule keeps the Problems panel clean
+	// without changing any site code.
+	"css.lint.vendorPrefix": "ignore"
+}

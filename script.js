@@ -843,7 +843,7 @@
     }
 
     /* ============================ SS Assist ============================== */
-    /* Premium floating AI widget wired to the existing website_ai backend.
+    /* Premium floating AI widget powered by the in-page engine (assist.js).
        Hidden while #stage (hero + 3D/CED flythrough) is in view; revealed
        with a subtle fade/slide only once that section has left the screen. */
 
@@ -862,14 +862,13 @@
         var ssaIsOpen = false;
         var ssaBusy = false;
 
-        /* ALWAYS call the LOCAL SS Assist server (website_ai.py --server).
-           Absolute URL so the site works identically from VS Code Live
-           Server (any port), file://, or the local server itself -
-           never an external host, no other server involved. */
-        var CHAT_API = 'http://127.0.0.1:8765/chat';
-
+        /* SS Assist runs FULLY inside the page: assist.js implements the
+           complete knowledge engine (company info, services, safety
+           answers) in plain JavaScript. No server, NO localhost, no
+           network requests at all - so Chrome never shows its
+           "Access other apps and services on this device" permission. */
         var SSA_OFFLINE_MSG =
-            'SS Assist local service is not running. Please start website_ai.py with the server command.';
+            'SS Assist engine could not be loaded. Please refresh the page.';
 
         function ssaSetOpen(open) {
             ssaIsOpen = open;
@@ -926,22 +925,22 @@
             if (ssaSendBtn) { ssaSendBtn.disabled = true; }
             ssaTyping(true);
 
-            console.info('[SS Assist] POST ' + CHAT_API + ' | Q: ' + text);
-            window.fetch(CHAT_API, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: text })
-            }).then(function (res) {
-                if (!res.ok) { throw new Error('HTTP ' + res.status); }
-                return res.json();
-            }).then(function (data) {
+            /* Answer is computed INSIDE the page by assist.js - no fetch,
+               no localhost, no external API of any kind. */
+            console.info('[SS Assist] local engine | Q: ' + text);
+
+            Promise.resolve().then(function () {
+                if (!window.SSAssistEngine || typeof window.SSAssistEngine.ask !== 'function') {
+                    throw new Error('assist.js is not loaded');
+                }
+                return window.SSAssistEngine.ask(text);
+            }).then(function (result) {
                 ssaTyping(false);
-                var result = (data && data.result) || {};
-                console.info('[SS Assist] OK ' + CHAT_API + ' 200 | A: ' +
+                console.info('[SS Assist] OK (client-side) | A: ' +
                              String(result.answer || '').slice(0, 80) + '...');
                 var bubble = ssaBubble('ai', result.answer || SSA_OFFLINE_MSG);
 
-                /* Surface the backend's GET_QUOTE action as a real link */
+                /* Surface the engine's GET_QUOTE action as a real link */
                 if (result.type === 'action' && result.action === 'GET_QUOTE') {
                     var cta = document.createElement('a');
                     cta.className = 'ssa__cta';
@@ -952,21 +951,10 @@
                 }
             }).catch(function (err) {
                 ssaTyping(false);
-                /* TypeError = fetch itself failed (service not running);
-                   anything else = the server answered with an error.
-                   Both are printed to the console - nothing is hidden. */
-                if (err && err.name === 'TypeError') {
-                    console.error('[SS Assist] FAILED ' + CHAT_API +
-                                  ' not reachable (is website_ai.py --server running?)', err);
-                    ssaBubble('ai', SSA_OFFLINE_MSG);
-                } else {
-                    console.error('[SS Assist] FAILED ' + CHAT_API +
-                                  ' -> ' + (err && err.message), err);
-                    ssaBubble('ai',
-                        'SS Assist service error: ' + (err && err.message) +
-                        ' from ' + CHAT_API +
-                        '. Please check the website_ai.py --server console.');
-                }
+                /* Nothing is hidden: printed straight to the console. */
+                console.error('[SS Assist] FAILED (client-side): ' +
+                              (err && err.message), err);
+                ssaBubble('ai', SSA_OFFLINE_MSG);
             }).then(function () {
                 ssaBusy = false;
                 if (ssaSendBtn) { ssaSendBtn.disabled = false; }

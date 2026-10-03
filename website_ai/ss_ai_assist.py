@@ -6,7 +6,6 @@
 
 import re
 import difflib
-from pathlib import Path
 
 ASSISTANT_NAME = "SS Assist"
 COMPANY_NAME = "SS Industries"
