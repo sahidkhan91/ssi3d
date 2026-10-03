@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SS Industries — Reliable Electrical &amp; Fire Solutions</title>
+    <meta name="description" content="An MSME-registered company delivering turnkey electrical and firefighting projects with quality, safety, and innovation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- Restore saved Day/Night theme before first paint (no flash, no reload) -->
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('ssi-theme') === 'day') {
+                    document.documentElement.setAttribute('data-theme', 'day');
+                }
+            } catch (e) { /* storage blocked -> default night theme */ }
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+    <!-- ============================= Preloader ============================= -->
+    <div class="preloader" id="preloader" role="status" aria-live="polite">
+        <div class="preloader__inner">
+                        <div class="preloader__brand">
+    <span class="preloader__ring preloader__ring--cw" aria-hidden="true"></span>
+    <span class="preloader__ring preloader__ring--ccw" aria-hidden="true"></span>
+    <img src="logo.png" alt="SS Industries" width="80" height="80">
+</div>
+            <div class="preloader__eyebrow">Preparing sequence</div>
+            <div class="preloader__count" hidden><span id="loadPct">0</span><sup>%</sup></div>
+            <div class="preloader__bar" hidden><span id="loadBar"></span></div>
+            <p class="preloader__status" id="loadStatus" hidden>Loading critical frames…</p>
+        </div>
+    </div>
+
+    <!-- ============================= Navigation ============================ -->
+    <header class="nav" id="nav">
+        <div class="nav__start">
+            <a class="nav__logo" href="#top"><img src="logo.png" alt="SS Industries" width="46" height="46"></a>
+            <button class="nav__theme" id="themeToggle" type="button" aria-label="Switch to Day Mode" title="Switch to Day Mode">
+                <span class="nav__theme-ico" aria-hidden="true">
+                    <svg class="nav__theme-ico-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.4 5.4l1.7 1.7M16.9 16.9l1.7 1.7M5.4 18.6l1.7-1.7M16.9 7.1l1.7-1.7"></path>
+                    </svg>
+                    <svg class="nav__theme-ico-moon" viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+        <nav class="nav__menu" id="navMenu">
+            <a href="#stage">Sequence</a>
+            <a href="#about">About</a>
+            <a href="#capabilities">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#team">Team</a>
+            <a href="#location">Location</a>
+            <a class="nav__cta" href="#contact">Contact Now</a>
+        </nav>
+        <button class="nav__burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span></button>
+    </header>
+
+    <main id="top">
+
+        <!-- ====================== Stage: hero + sequence ==================== -->
+        <section class="stage" id="stage">
+            <div class="stage__sticky">
+                <canvas id="seqCanvas" aria-label="Scroll-driven 3D plant flythrough"></canvas>
+                <div class="stage__vignette" aria-hidden="true"></div>
+
+                <!-- Hero overlay (visible at scroll progress 0) -->
+                <div class="hero" id="hero">
+                    <p class="hero__kicker"><i></i>3D Engineering Visualization</p>
+                    <h1 class="hero__title">Walk the plant <em>before it&rsquo;s built.</em></h1>
+                    <p class="hero__lead">A 450-frame cinematic flythrough of a turnkey hot-dip galvanizing line. Scroll to travel through the facility — frame&nbsp;by&nbsp;frame.</p>
+                    <div class="hero__cue"><span>Scroll</span><b></b></div>
+                </div>
+
+                <!-- Chapter captions, crossfaded by scroll progress -->
+                <div class="chapters">
+                    <article class="chapter" data-range="0.05,0.26" data-label="01 — Site overview">
+                        <span class="chapter__no">01</span>
+                        <h2>Site overview</h2>
+                        <p>A full process hall resolved to the last purlin — structure, services and access coordinated inside one clash-free model.</p>
+                    </article>
+                    <article class="chapter" data-range="0.26,0.48" data-label="02 — Pre-treatment">
+                        <span class="chapter__no">02</span>
+                        <h2>Pre-treatment line</h2>
+                        <p>Ten immersion tanks, rinses and dryers laid out for continuous flow — every aisle, jig and handrail clearance verified in 3D.</p>
+                    </article>
+                    <article class="chapter" data-range="0.48,0.68" data-label="03 — Kettle &amp; gantry">
+                        <span class="chapter__no">03</span>
+                        <h2>Kettle &amp; gantry</h2>
+                        <p>The heart of the line: zinc kettle, extraction hood and twin-hoist gantry — cycle times simulated to the second.</p>
+                    </article>
+                    <article class="chapter" data-range="0.68,0.86" data-label="04 — Coating &amp; run-out">
+                        <span class="chapter__no">04</span>
+                        <h2>Coating &amp; run-out</h2>
+                        <p>Passivation, drying and run-out storage. Product leaves the line — and the model — nothing less than finished.</p>
+                    </article>
+                    <article class="chapter" data-range="0.86,1.01" data-label="05 — Commissioned">
+                        <span class="chapter__no">05</span>
+                        <h2>Commissioned</h2>
+                        <p>What you scrolled is what you get: a documented, fabrication-ready plant delivered turnkey.</p>
+                    </article>
+                </div>
+
+                <!-- Heads-up display -->
+                <div class="hud hud--label is-hidden" id="chapterLabel">01 — Site overview</div>
+                <div class="hud hud--rail"><span id="railFill"></span></div>
+            </div>
+        </section>
+
+        <!-- ============================== Marquee =========================== -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee__track">
+                <span>Electrical systems</span><i>◆</i><span>Firefighting systems</span><i>◆</i><span>Turnkey projects</span><i>◆</i><span>CED coating plants</span><i>◆</i>
+                <span>Electrical systems</span><i>◆</i><span>Firefighting systems</span><i>◆</i><span>Turnkey projects</span><i>◆</i><span>CED coating plants</span><i>◆</i>
+            </div>
+        </div>
+
+        <!-- =============================== About ============================ -->
+        <section class="section about" id="about">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <span class="eyebrow">01 — About</span>
+                    <h2>Innovative, safe, <em>reliable engineering.</em></h2>
+                </div>
+                <div class="about__grid">
+                    <div class="about__media reveal">
+                        <img src="CED_frames/frame_0100.png" alt="Interior of the process hall, 3D visualization" loading="lazy" decoding="async">
+                        <span class="about__tag">CED coating plant · frame 0100</span>
+                    </div>
+                    <div class="about__copy">
+                        <p class="reveal" style="--d:.08s">SS Industries is a leading organization specializing in turnkey projects across residential, commercial, industrial, and hospitality sectors. Our expertise spans electrical and firefighting systems, CED coating plants, machinery, and related industrial solutions. Established in 2025 under the MSME Department, Government of India, we are built on a foundation of skill, dedication, and professionalism.</p>
+                        <p class="reveal" style="--d:.16s">Our highly qualified and experienced team is committed to delivering projects efficiently, safely, and to the highest standards of quality. With a strong focus on precision, innovation, and client satisfaction, we ensure every project is executed seamlessly. At SS Industries, we turn complex challenges into reliable, long-lasting solutions, building trust and lasting relationships with our clients.</p>
+                        <ul class="about__list reveal" style="--d:.22s">
+                            <li>Turnkey Project Expertise</li>
+                            <li>Electrical &amp; Firefighting Systems</li>
+                            <li>CED Coating Plants &amp; Machinery</li>
+                        </ul>
+                        <div class="stats reveal" style="--d:.3s">
+                            <div class="stat"><b data-count="2025" data-suffix="">0</b><span>Year established</span></div>
+                            <div class="stat"><b data-count="5" data-suffix="">0</b><span>Core services</span></div>
+                            <div class="stat"><b data-count="4" data-suffix="">0</b><span>Team experts</span></div>
+                            <div class="stat"><b data-count="100" data-suffix="%">0</b><span>Turnkey focus</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features">
+                    <article class="feature reveal" style="--d:.05s">
+                        <h3>Skilled Team</h3>
+                        <p>Our success comes from a skilled, experienced team delivering innovative solutions and flawless execution.</p>
+                    </article>
+                    <article class="feature reveal" style="--d:.1s">
+                        <h3>Trusted Partnerships</h3>
+                        <p>We foster lasting partnerships through integrity, transparency, and reliable delivery.</p>
+                    </article>
+                    <article class="feature reveal" style="--d:.15s">
+                        <h3>Innovative Engineering</h3>
+                        <p>We leverage modern technology to design efficient, reliable, and future-ready systems.</p>
+                    </article>
+                    <article class="feature reveal" style="--d:.2s">
+                        <h3>Quality Focus</h3>
+                        <p>We ensure every system meets the highest standards by prioritizing safety, reliability, and excellence.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================== Capabilities ========================= -->
+        <section class="section caps" id="capabilities">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <span class="eyebrow">02 — Services</span>
+                    <h2>Turnkey solutions, <em>end to end.</em></h2>
+                    <p class="section__lead">At SS Industries, we deliver turnkey solutions focused on quality, safety, and reliability for residential, commercial, industrial, and institutional projects.</p>
+                </div>
+                <div class="caps__grid">
+                    <article class="cap reveal" style="--d:.05s">
+                        <span>01</span>
+                        <h3>Electrical Systems</h3>
+                        <p>We provide complete electrical installation and maintenance services, ensuring safe, reliable, and efficient power solutions for all types of facilities.</p>
+                        <button class="cap__more" type="button" data-modal-open="svcModal">Read More &rarr;</button>
+                    </article>
+                    <article class="cap reveal" style="--d:.1s">
+                        <span>02</span>
+                        <h3>Firefighting Systems</h3>
+                        <p>Complete fire protection design, supply, and installation in compliance with national safety standards.</p>
+                        <button class="cap__more" type="button" data-modal-open="svcModalFire">Read More &rarr;</button>
+                    </article>
+                    <article class="cap reveal" style="--d:.15s">
+                        <span>03</span>
+                        <h3>Turnkey Project Execution</h3>
+                        <p>From concept to completion, we handle complete project management, ensuring timely delivery, quality assurance, and cost efficiency.</p>
+                        <button class="cap__more" type="button" data-modal-open="svcModalTurnkey">Read More &rarr;</button>
+                    </article>
+                    <article class="cap reveal" style="--d:.2s">
+                        <span>04</span>
+                        <h3>Paint Shops &amp; Ducting Work</h3>
+                        <p>Comprehensive fabrication and installation solutions for industrial painting and air management systems.</p>
+                        <button class="cap__more" type="button" data-modal-open="svcModalPaint">Read More &rarr;</button>
+                    </article>
+                    <article class="cap reveal" style="--d:.25s">
+                        <span>05</span>
+                        <h3>CED Coating Plants &amp; Machinery</h3>
+                        <p>Customized Cathodic Electro Deposition (CED) plant design, installation, and servicing.</p>
+                        <button class="cap__more" type="button" data-modal-open="svcModalCED">Read More &rarr;</button>
+                    </article>
+                    <a class="cap cap--cta reveal" style="--d:.3s" href="tel:+918809150097">
+                        <span>Get your quote</span>
+                        <h3>Call +91-8809150097</h3>
+                        <p>Ready to start? Contact us for a free quote and site discussion.</p>
+                        <div class="cta-greet" aria-hidden="true">
+                            <video muted playsinline preload="metadata"><source src="hello%20video.webm" type="video/webm"><source src="hello%20video.mp4" type="video/mp4"></video>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================== Gallery =========================== -->
+        <section class="section gallery" id="gallery">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <span class="eyebrow">03 — Gallery</span>
+                    <h2>Inside our <em>plant floor.</em></h2>
+                </div>
+                <div class="gal">
+                    <figure class="gal__item reveal" style="--d:.05s" data-full="photo1.jpeg" data-cap="Process line — tanks &amp; hoists">
+                        <img src="photo1.jpeg" alt="Electroplating process line with tanks and overhead hoists" loading="lazy" decoding="async">
+                        <figcaption>01 — Process line</figcaption>
+                    </figure>
+                    <figure class="gal__item reveal" style="--d:.1s" data-full="photo2.jpeg" data-cap="Automatic hoist over process tanks">
+                        <img src="photo2.jpeg" alt="Yellow automatic hoist above the plating tanks" loading="lazy" decoding="async">
+                        <figcaption>02 — Automatic hoist</figcaption>
+                    </figure>
+                    <figure class="gal__item reveal" style="--d:.15s" data-full="photo3.jpeg" data-cap="Tank row under blue gantry">
+                        <img src="photo3.jpeg" alt="Row of process tanks under the blue steel gantry" loading="lazy" decoding="async">
+                        <figcaption>03 — Tank row</figcaption>
+                    </figure>
+                    <figure class="gal__item reveal" style="--d:.2s" data-full="photo4.jpeg" data-cap="Hoist &amp; processing tanks">
+                        <img src="photo4.jpeg" alt="Processing tanks with the hoist structure" loading="lazy" decoding="async">
+                        <figcaption>04 — Processing tanks</figcaption>
+                    </figure>
+                    <figure class="gal__item reveal" style="--d:.25s" data-full="photo5.jpeg" data-cap="SS Industries installed hoist">
+                        <img src="photo5.jpeg" alt="SS Industries branded hoist installed over the tanks" loading="lazy" decoding="async">
+                        <figcaption>05 — SS Industries hoist</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================ Team ============================== -->
+        <section class="section team" id="team">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <span class="eyebrow">04 — Team</span>
+                    <h2>Meet the experts <em>who make it happen.</em></h2>
+                    <p class="section__lead">Our team is a blend of skilled professionals who bring passion, precision, and creativity to every project. Together, we turn ideas into impactful results.</p>
+                </div>
+                <div class="team__grid">
+                    <article class="team__card reveal" style="--d:.05s">
+                        <span class="team__avatar">SK</span>
+                        <h3>Samshad Khan</h3>
+                        <p>MD / Director</p>
+                    </article>
+                    <article class="team__card reveal" style="--d:.1s">
+                        <span class="team__avatar">SK</span>
+                        <h3>Sabir Khan</h3>
+                        <p>CEO</p>
+                    </article>
+                    <article class="team__card reveal" style="--d:.15s">
+                        <span class="team__avatar">AS</span>
+                        <h3>Ajeet Singh</h3>
+                        <p>General Manager</p>
+                    </article>
+                    <article class="team__card reveal" style="--d:.2s">
+                        <span class="team__avatar">MA</span>
+                        <h3>Majid Alam</h3>
+                        <p>Electrical Engineer</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================== Testimonials =========================== -->
+        <section class="section quotes" id="testimonials">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <span class="eyebrow">05 — Testimonials</span>
+                    <h2>What our clients <em>say.</em></h2>
+                </div>
+                <div class="quotes__grid">
+                    <figure class="quote reveal" style="--d:.05s">
+                        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+                        <blockquote>Working with SS Industries was a seamless experience. Their team handled our commercial project with utmost professionalism, ensuring every detail was executed perfectly and on time. We highly recommend their services.</blockquote>
+                        <figcaption><b>Sunny Khan</b><span>One of our Clients</span></figcaption>
+                        <div class="quote__stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    </figure>
+                    <figure class="quote reveal" style="--d:.12s">
+                        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+                        <blockquote>SS Industries transformed our industrial setup with their turnkey solutions. From planning to execution, their expertise, precision, and commitment to quality were remarkable. Truly a reliable partner for any project.</blockquote>
+                        <figcaption><b>Rohan Kumar</b><span>One of our Clients</span></figcaption>
+                        <div class="quote__stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================= Location =========================== -->
+        <section class="section location" id="location">
+            <div class="wrap location__grid">
+                <div class="location__copy reveal">
+                    <span class="eyebrow">06 — Location</span>
+                    <h2>Faridabad, <em>Haryana.</em></h2>
+                    <p class="location__lead">Plot No. 758, 33 Feet Road, Sector 58 — from here our team plans and delivers turnkey electrical, firefighting and CED plant projects across residential, commercial, industrial and hospitality sectors.</p>
+                    <ul class="location__list">
+                        <li><span>Office</span><a href="https://maps.app.goo.gl/frQcVggynuA6MA2s8" target="_blank" rel="noopener">Plot No. 758, 33 Feet Road, Sector 58, Faridabad, Haryana 121004</a></li>
+                        <li><span>Phone</span><a href="tel:+918809150097">+91-8809150097</a></li>
+                        <li><span>Hours</span>9:00 AM – 6:00 PM</li>
+                    </ul>
+                    <a class="btn" href="#contact">Plan a visit <span>→</span></a>
+                </div>
+                <div class="map reveal" style="--d:.15s" role="img" aria-label="Stylized map showing the SS Industries office in Faridabad">
+                    <span class="map__river"></span>
+                    <span class="map__road map__road--a"></span>
+                    <span class="map__road map__road--b"></span>
+                    <span class="map__road map__road--c"></span>
+                    <span class="map__pin"></span>
+                    <span class="map__pulse"></span>
+                    <span class="map__chip">SS Industries HQ</span>
+                    <span class="map__scale">250 m</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================== Contact =========================== -->
+        <section class="section contact" id="contact">
+            <div class="wrap contact__grid">
+                <div class="contact__intro reveal">
+                    <span class="eyebrow">07 — Contact</span>
+                    <h2>Let&rsquo;s build <em>your next project.</em></h2>
+                    <p>Send your query anytime — drawings, load schedules or just a requirement on a call. We&rsquo;ll come back with a clear scope and a fixed quote within two working days.</p>
+                    <div class="contact__details">
+                        <a href="mailto:info@ssindustries.com">info@ssindustries.com</a>
+                        <a href="tel:+918809150097">+91-8809150097</a>
+                        <span>Plot No. 758, 33 Feet Road, Sector 58, Faridabad, Haryana 121004</span>
+                    </div>
+                </div>
+                <form class="form reveal" id="contactForm" style="--d:.12s" novalidate>
+                    <div class="field">
+                        <label for="fName">Name</label>
+                        <input id="fName" name="name" type="text" autocomplete="name" required>
+                    </div>
+                    <div class="field">
+                        <label for="fEmail">Email</label>
+                        <input id="fEmail" name="email" type="email" autocomplete="email" required>
+                    </div>
+                    <div class="field">
+                        <label for="fCompany">Company</label>
+                        <input id="fCompany" name="company" type="text" autocomplete="organization">
+                    </div>
+                    <div class="field">
+                        <label for="fMsg">Project/ requirement</label>
+                        <textarea id="fMsg" name="message" rows="4" required></textarea>
+                    </div>
+                    <button class="btn btn--solid" type="submit">Send enquiry <span>→</span></button>
+                    <p class="form__note" id="formNote" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- ============================== Footer ============================ -->
+        <footer class="footer">
+            <div class="wrap footer__grid">
+                <a class="footer__logo" href="#top"><img src="logo.png" alt="SS Industries" width="44" height="44"></a>
+                <nav class="footer__links">
+                    <a href="#stage">Sequence</a>
+                    <a href="#about">About</a>
+                    <a href="#capabilities">Services</a>
+                    <a href="#gallery">Gallery</a>
+                    <a href="#team">Team</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <p>© 2025 SS INDUSTRIES — All Rights Reserved. An MSME-registered company.</p>
+                <button class="to-top" id="toTop" type="button">Back to top ↑</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- =================== Electrical Systems modal ======================= -->
+    <div class="svc-modal" id="svcModal" role="dialog" aria-modal="true" aria-labelledby="svcModalTitle">
+        <div class="svc-modal__panel">
+            <button class="svc-modal__close" id="svcClose" type="button" aria-label="Close dialog">✕</button>
+            <header class="svc-modal__head">
+                <p class="svc-modal__kicker">Service 01</p>
+                <h3 id="svcModalTitle">Electrical Systems</h3>
+            </header>
+            <div class="svc-modal__body">
+                <section class="svc-block">
+                    <h4>What is it?</h4>
+                    <p>Industrial electrical systems include electrical installation, power distribution, control panels, protection systems, wiring, cabling and related electrical infrastructure.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>What we do:</h4>
+                    <ul>
+                        <li>Industrial electrical installation</li>
+                        <li>Control and distribution panels</li>
+                        <li>Cable laying and cable termination</li>
+                        <li>Electrical maintenance</li>
+                        <li>Fault checking and troubleshooting</li>
+                        <li>Electrical safety and protection systems</li>
+                        <li>Inspection and improvement of existing electrical systems</li>
+                    </ul>
+                </section>
+                <section class="svc-block">
+                    <h4>Why is it important?</h4>
+                    <p>A properly designed and maintained electrical system helps provide safe, reliable and continuous power to industrial facilities while reducing the risk of electrical faults and unnecessary downtime.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>How SS Industries helps:</h4>
+                    <p>SS Industries provides electrical installation, maintenance and related engineering services according to the requirements of the project.</p>
+                </section>
+            </div>
+            <footer class="svc-modal__actions">
+                <a class="btn btn--solid" href="#contact" id="svcStart">Start a Project <span>&rarr;</span></a>
+                <button class="btn" type="button" id="svcDismiss">Close</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- =================== Firefighting Systems modal ===================== -->
+    <div class="svc-modal" id="svcModalFire" role="dialog" aria-modal="true" aria-labelledby="svcModalFireTitle">
+        <div class="svc-modal__panel">
+            <button class="svc-modal__close" type="button" aria-label="Close dialog">✕</button>
+            <header class="svc-modal__head">
+                <p class="svc-modal__kicker">Service 02</p>
+                <h3 id="svcModalFireTitle">Firefighting Systems</h3>
+            </header>
+            <div class="svc-modal__body">
+                <section class="svc-block">
+                    <h4>What is it?</h4>
+                    <p>Firefighting systems are designed to detect, control and help protect industrial facilities from fire hazards.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>What we do:</h4>
+                    <ul>
+                        <li>Fire protection system design</li>
+                        <li>Firefighting equipment supply</li>
+                        <li>Firefighting system installation</li>
+                        <li>Fire hydrant systems</li>
+                        <li>Fire sprinkler systems</li>
+                        <li>Fire alarm and detection systems</li>
+                        <li>Fire extinguishing equipment</li>
+                        <li>Inspection, testing and maintenance</li>
+                    </ul>
+                </section>
+                <section class="svc-block">
+                    <h4>Why is it important?</h4>
+                    <p>A properly designed firefighting system helps protect people, equipment, buildings and industrial operations from fire-related risks and can support compliance with applicable safety requirements.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>How SS Industries helps:</h4>
+                    <p>SS Industries provides firefighting system design, supply, installation and related engineering support according to the requirements of the project and applicable safety standards.</p>
+                </section>
+            </div>
+            <footer class="svc-modal__actions">
+                <a class="btn btn--solid" href="#contact">Start a Project <span>&rarr;</span></a>
+                <button class="btn" type="button">Close</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ================== Turnkey Project Execution modal ================== -->
+    <div class="svc-modal" id="svcModalTurnkey" role="dialog" aria-modal="true" aria-labelledby="svcModalTurnkeyTitle">
+        <div class="svc-modal__panel">
+            <button class="svc-modal__close" type="button" aria-label="Close dialog">✕</button>
+            <header class="svc-modal__head">
+                <p class="svc-modal__kicker">Service 03</p>
+                <h3 id="svcModalTurnkeyTitle">Turnkey Project Execution</h3>
+            </header>
+            <div class="svc-modal__body">
+                <section class="svc-block">
+                    <h4>What is it?</h4>
+                    <p>A turnkey project involves managing and coordinating the major stages of an industrial project from planning and preparation through execution and completion.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>What we do:</h4>
+                    <ul>
+                        <li>Project planning and coordination</li>
+                        <li>Engineering and technical support</li>
+                        <li>Fabrication and installation</li>
+                        <li>Site coordination</li>
+                        <li>Project execution and supervision</li>
+                        <li>Quality checking</li>
+                        <li>Testing and commissioning support</li>
+                        <li>Project completion and handover</li>
+                    </ul>
+                </section>
+                <section class="svc-block">
+                    <h4>Why is it important?</h4>
+                    <p>Proper project coordination helps keep different activities organized and can reduce delays, coordination problems and unnecessary project downtime.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>How SS Industries helps:</h4>
+                    <p>SS Industries supports industrial projects according to the specific requirements, scope and site conditions of each project.</p>
+                </section>
+            </div>
+            <footer class="svc-modal__actions">
+                <a class="btn btn--solid" href="#contact">Start a Project <span>&rarr;</span></a>
+                <button class="btn" type="button">Close</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- =================== Paint Shops &amp; Ducting modal ================= -->
+    <div class="svc-modal" id="svcModalPaint" role="dialog" aria-modal="true" aria-labelledby="svcModalPaintTitle">
+        <div class="svc-modal__panel">
+            <button class="svc-modal__close" type="button" aria-label="Close dialog">✕</button>
+            <header class="svc-modal__head">
+                <p class="svc-modal__kicker">Service 04</p>
+                <h3 id="svcModalPaintTitle">Paint Shops &amp; Ducting Work</h3>
+            </header>
+            <div class="svc-modal__body">
+                <section class="svc-block">
+                    <h4>What is it?</h4>
+                    <p>Industrial paint shops require suitable painting areas, ventilation, air movement and exhaust arrangements for controlled and efficient painting operations.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>What we do:</h4>
+                    <ul>
+                        <li>Industrial paint shop fabrication</li>
+                        <li>Paint shop installation</li>
+                        <li>Ducting fabrication and installation</li>
+                        <li>Air ventilation systems</li>
+                        <li>Exhaust and air management</li>
+                        <li>Supporting structures</li>
+                        <li>Maintenance and modification work</li>
+                    </ul>
+                </section>
+                <section class="svc-block">
+                    <h4>Why is it important?</h4>
+                    <p>Proper ventilation and air management can help maintain a suitable working environment and support efficient industrial painting operations.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>How SS Industries helps:</h4>
+                    <p>SS Industries provides fabrication and installation solutions according to the requirements of the paint shop, ducting system and industrial facility.</p>
+                </section>
+            </div>
+            <footer class="svc-modal__actions">
+                <a class="btn btn--solid" href="#contact">Start a Project <span>&rarr;</span></a>
+                <button class="btn" type="button">Close</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ================== CED Coating Plants &amp; Machinery modal ========== -->
+    <div class="svc-modal" id="svcModalCED" role="dialog" aria-modal="true" aria-labelledby="svcModalCEDTitle">
+        <div class="svc-modal__panel">
+            <button class="svc-modal__close" type="button" aria-label="Close dialog">✕</button>
+            <header class="svc-modal__head">
+                <p class="svc-modal__kicker">Service 05</p>
+                <h3 id="svcModalCEDTitle">CED Coating Plants &amp; Machinery</h3>
+            </header>
+            <div class="svc-modal__body">
+                <section class="svc-block">
+                    <h4>What is CED?</h4>
+                    <p>CED (Cathodic Electro Deposition) is an industrial coating process in which electrically charged paint particles are deposited onto a conductive component to provide an even protective coating.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>What we do:</h4>
+                    <ul>
+                        <li>CED plant design</li>
+                        <li>CED plant fabrication</li>
+                        <li>Plant installation</li>
+                        <li>CED machinery and equipment</li>
+                        <li>Conveyor and material handling systems</li>
+                        <li>Process tank and supporting systems</li>
+                        <li>Electrical and control support</li>
+                        <li>Testing and commissioning support</li>
+                        <li>Maintenance and servicing</li>
+                    </ul>
+                </section>
+                <section class="svc-block">
+                    <h4>Why is it important?</h4>
+                    <p>CED coating can provide consistent coating coverage and is widely used where controlled and uniform protective coating is required.</p>
+                </section>
+                <section class="svc-block">
+                    <h4>How SS Industries helps:</h4>
+                    <p>SS Industries provides CED plant and machinery solutions based on project requirements, production needs and site conditions.</p>
+                </section>
+            </div>
+            <footer class="svc-modal__actions">
+                <a class="btn btn--solid" href="#contact">Start a Project <span>&rarr;</span></a>
+                <button class="btn" type="button">Close</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ============================= Lightbox ============================== -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lightbox__close" id="lbClose" type="button" aria-label="Close viewer">✕</button>
+        <button class="lightbox__nav lightbox__prev" id="lbPrev" type="button" aria-label="Previous frame">‹</button>
+        <figure class="lightbox__figure">
+            <img id="lbImg" src="" alt="">
+            <figcaption id="lbCap"></figcaption>
+        </figure>
+        <button class="lightbox__nav lightbox__next" id="lbNext" type="button" aria-label="Next frame">›</button>
+    </div>
+
+    <!-- ======================= Background-load chip ======================== -->
+    <div class="chip" id="assetChip" hidden>Sequence <b id="assetPct">0</b>%</div>
+
+    <!-- =================== Optional WhatsApp popup ======================= -->
+    <div class="wa-opt" id="waOpt" role="dialog" aria-modal="true" aria-labelledby="waOptTitle">
+        <div class="wa-opt__panel">
+            <button class="wa-opt__close" id="waOptClose" type="button" aria-label="Close dialog">✕</button>
+            <span class="wa-opt__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24s8.24 3.7 8.24 8.24-3.7 8.24-8.24 8.24Zm4.52-6.17c-.25-.13-1.47-.72-1.69-.8-.23-.09-.39-.13-.56.12-.16.25-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.13.16 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+            </span>
+            <p class="wa-opt__q" id="waOptTitle">Would you also like to send these details on WhatsApp?</p>
+            <div class="wa-opt__actions">
+                <button class="btn btn--solid" id="waOptSend" type="button">Send on WhatsApp</button>
+                <button class="btn" id="waOptNo" type="button">No Thanks</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== Success celebration =========================== -->
+    <div class="celebrate" id="celebrate" role="status" aria-live="polite" aria-hidden="true">
+        <div class="celebrate__panel">
+            <span class="celebrate__spark" aria-hidden="true">✦</span>
+            <h3>Congratulations!</h3>
+            <p>Thank you! Your enquiry has been received successfully.</p>
+        </div>
+    </div>
+    <canvas class="confetti" id="confettiCanvas" aria-hidden="true"></canvas>
+
+    <!-- ============================= SS Assist =========================== -->
+    <div class="ssa" id="ssa">
+        <button class="ssa__btn" id="ssaBtn" type="button" aria-label="Open SS Assist chat" aria-expanded="false" aria-controls="ssaPanel" title="SS Assist">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                <path d="M12 9.4l.85 2.15L15 12.4l-2.15.85L12 15.4l-.85-2.15L9 12.4l2.15-.85z" fill="currentColor" stroke="none"></path>
+            </svg>
+        </button>
+
+        <div class="ssa__panel" id="ssaPanel" role="dialog" aria-label="SS Assist — AI Assistant for SS Industries" aria-hidden="true">
+            <header class="ssa__head">
+                <span class="ssa__avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        <path d="M12 9.4l.85 2.15L15 12.4l-2.15.85L12 15.4l-.85-2.15L9 12.4l2.15-.85z" fill="currentColor" stroke="none"></path>
+                    </svg>
+                </span>
+                <div class="ssa__id">
+                    <h3>SS Assist</h3>
+                    <p>AI Assistant for SS Industries</p>
+                </div>
+                <button class="ssa__close" id="ssaClose" type="button" aria-label="Close SS Assist">&#10005;</button>
+            </header>
+
+            <p class="ssa__note">आप मुझसे Hindi, English या Hinglish में बात कर सकते हैं।</p>
+
+            <div class="ssa__log" id="ssaLog" role="log" aria-live="polite" aria-relevant="additions">
+                <div class="ssa__msg ssa__msg--ai"><p>Hello! 👋 How can I help you today?</p></div>
+            </div>
+
+            <div class="ssa__quick" id="ssaQuick" aria-label="Quick replies">
+                <button class="ssa__chip" type="button">What is SS Industries?</button>
+                <button class="ssa__chip" type="button">What products and services do you provide?</button>
+                <button class="ssa__chip" type="button">What is Electrical Systems?</button>
+                <button class="ssa__chip" type="button">What are Firefighting Systems?</button>
+                <button class="ssa__chip" type="button">What is Turnkey Project Execution?</button>
+                <button class="ssa__chip" type="button">What are Paint Shops &amp; Ducting?</button>
+                <button class="ssa__chip" type="button">What is CED Coating?</button>
+                <button class="ssa__chip" type="button">Do you make Manual, Semi-Automatic and Automatic CED Plants?</button>
+                <button class="ssa__chip" type="button">Do you sell PLC Panels and provide PLC Programming?</button>
+                <button class="ssa__chip" type="button">Do you provide burner sale and service?</button>
+                <button class="ssa__chip" type="button">Tell me about Heat Storm</button>
+                <button class="ssa__chip" type="button">I have a fire-system problem. Can I get free guidance?</button>
+                <button class="ssa__chip" type="button">How can I get a quotation?</button>
+                <button class="ssa__chip" type="button">Tell me about the website</button>
+                <button class="ssa__chip" type="button">Show available services</button>
+            </div>
+
+            <form class="ssa__form" id="ssaForm" autocomplete="off">
+                <input id="ssaInput" type="text" placeholder="Type your message…" aria-label="Type your message" enterkeyhint="send">
+                <button type="submit" aria-label="Send message">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
